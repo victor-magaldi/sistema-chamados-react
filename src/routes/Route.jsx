@@ -7,7 +7,7 @@ export default function RouteWrapper({
 }) {
   console.log(Component, isprivate, rest);
   const loading = false;
-  const signed = true;
+  const signed = false;
 
   if (loading) {
     return <div>carregando...</div>;
