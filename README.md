@@ -15,6 +15,8 @@ Esse Projeto foi desenvolvido usando:
 
 ✔️React JS
 
+✔️React Router DOM
+
 ✔️Css modules
 
 ✔️Context Api
