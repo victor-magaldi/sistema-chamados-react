@@ -1,6 +1,6 @@
 # Sobre
 
-O Projeto foi desenvolvido para desenvolver um sistema de chamado , usando como backEnd o Firebase.
+Este projeto é sistema de chamado , usando como backEnd o Firebase.
 Os chamados possuem ums status real time.
 Foi desenvolvido features de login e página de Cadastro.
 
