@@ -20,8 +20,64 @@ export default function AuthProvider({ children }) {
     loadingStorage();
   }, []);
 
+  async function signUp(email, password, name) {
+    setLoadingAuth(true);
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(async (value) => {
+        console.log(value);
+        // aqui é feito a relação do uid devolvido pelo create createUserWithEmailAndPassword
+        // com a coleção users
+        const uid = value.user.uid;
+        await firebase
+          .firestore()
+          .collection("users")
+          .doc(uid)
+          .set({
+            email: email,
+            name: name,
+            avatarUrl: null,
+          })
+          .then(() => {
+            const data = {
+              email: email,
+              name: name,
+              uid: uid,
+              avatarUrl: null,
+            };
+            setUser(data);
+            localStoraUser(data);
+            loadingAuth(false);
+          });
+      })
+      .catch((error) => console.log("erro ao criar o usuario", error));
+  }
+
+  function localStoraUser(dataUser) {
+    localStorage.setItem("sistemaUser", JSON.stringify(dataUser));
+  }
+
+  async function signOut() {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        localStorage.removeItem("sistemaUser");
+        setUser(null);
+      });
+  }
+
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, loading }}>
+    <AuthContext.Provider
+      value={{
+        signed: !!user,
+        user,
+        loading,
+        signUp,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

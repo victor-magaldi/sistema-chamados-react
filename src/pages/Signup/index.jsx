@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/Auth";
 
 import logo from "../../assets/logo.png";
 import styles from "./Signup.module.css";
@@ -9,8 +10,10 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  const { signUp } = useContext(AuthContext);
+
   function handleSubmit() {
-    alert("submetido");
+    if (email && password && name) signUp(email, password, name);
   }
   return (
     <div className={styles.registerContainer}>
@@ -18,7 +21,12 @@ function Signup() {
         <div className={styles.registerArea}>
           <img src={logo} alt="logo-register" />
         </div>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <h1>Registrar</h1>
           <input
             type="text"
