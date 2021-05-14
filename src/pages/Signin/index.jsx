@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { AuthContext } from "../../contexts/Auth";
 
 import logo from "../../assets/logo.png";
 import styles from "./Signin.module.css";
@@ -7,8 +9,12 @@ import styles from "./Signin.module.css";
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function handleSubmit() {
-    alert("submetido");
+
+  const { signIn, loadingAuth } = useContext(AuthContext);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (email && password) signIn(email, password);
   }
   return (
     <div className={styles.loginContainer}>
@@ -30,7 +36,9 @@ function Signin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Acessar</button>
+          <button type="submit">
+            {loadingAuth ? "carregando..." : "Acessar"}
+          </button>
         </form>
         <Link to="/register" className={styles.linkCreateAccount}>
           Criar uma conta

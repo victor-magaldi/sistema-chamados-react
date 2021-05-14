@@ -20,6 +20,36 @@ export default function AuthProvider({ children }) {
     loadingStorage();
   }, []);
 
+  async function signIn(email, password) {
+    setLoading(true);
+
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(async (value) => {
+        const uid = value.user.uid;
+        const userProfile = await firebase
+          .firestore()
+          .collection("users")
+          .doc(uid)
+          .get();
+
+        const data = {
+          uid: uid,
+          name: userProfile.data().name,
+          avatarUrl: userProfile.data().avatarUrl,
+          email: value.user.email,
+        };
+        setUser(data);
+        localStoraUser(data);
+        loadingAuth(false);
+      })
+      .catch((error) => {
+        console.log("erro ao logar ", error);
+        setLoading(false);
+      });
+  }
+
   async function signUp(email, password, name) {
     setLoadingAuth(true);
     await firebase
@@ -74,6 +104,8 @@ export default function AuthProvider({ children }) {
         signed: !!user,
         user,
         loading,
+        loadingAuth,
+        signIn,
         signUp,
         signOut,
       }}
