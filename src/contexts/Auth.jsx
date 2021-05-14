@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import firebase from "../services/firebaseConnection";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -42,11 +43,15 @@ export default function AuthProvider({ children }) {
         };
         setUser(data);
         localStoraUser(data);
-        loadingAuth(false);
+        setLoadingAuth(false);
+        toast.success("Bem vindo de volta");
       })
       .catch((error) => {
         console.log("erro ao logar ", error);
         setLoading(false);
+        setLoadingAuth(false);
+
+        toast.error("ops! Algo deu errado");
       });
   }
 
@@ -78,10 +83,15 @@ export default function AuthProvider({ children }) {
             };
             setUser(data);
             localStoraUser(data);
-            loadingAuth(false);
+            setLoadingAuth(false);
+            toast.success("Bem vindo a Plataforma");
           });
       })
-      .catch((error) => console.log("erro ao criar o usuario", error));
+      .catch((error) => {
+        console.log("erro ao criar o usuario", error);
+        toast.error("ops! Algo deu errado");
+        setLoadingAuth(false);
+      });
   }
 
   function localStoraUser(dataUser) {
