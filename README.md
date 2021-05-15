@@ -22,3 +22,7 @@ Esse Projeto foi desenvolvido usando:
 ✔️Context Api
 
 ✔️firebase(Auth, Firestore, RealTime)
+
+✔️react-toastify
+
+✔️react-icons
