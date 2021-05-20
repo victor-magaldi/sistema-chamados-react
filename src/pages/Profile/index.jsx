@@ -3,7 +3,7 @@ import styles from "./Profile.module.css";
 
 import Header from "../../components/Header";
 import Title from "../../components/Title";
-import avatar from "../../assets/avatar.png";
+import avatarDefault from "../../assets/avatar.png";
 
 import { AuthContext } from "../../contexts/Auth";
 
@@ -11,11 +11,12 @@ import { FiSettings } from "react-icons/fi";
 import { FiUpload } from "react-icons/fi";
 
 export default function Profile() {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [avataUrl, setAvatar] = useState(user && user.avataUrl);
+  console.log(avatarDefault);
 
   return (
     <div>
@@ -31,21 +32,33 @@ export default function Profile() {
               <span>
                 <FiUpload color="#fff" size={25}></FiUpload>
               </span>
-              <input type="file" name="avatar" accept="image/*" /> <br />
-              {avataUrl === null ? (
-                <img src={avatar} alt="avatar" width={250} height={250} />
-              ) : (
-                <img src={avataUrl} alt="avatar" width={250} height={250}></img>
-              )}
+              <input type="file" id="avatar" accept="image/*" /> <br />
+              <img src={avataUrl ? avataUrl : avatarDefault} alt="avatar" />
             </label>
-            <label htmlFor="name"></label>
+
+            <label htmlFor="name">nome</label>
             <input
               type="text"
-              name="name"
+              id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              disabled={true}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <button type="submit">Salvar</button>
           </form>
+        </div>
+        <div className={styles.container}>
+          <button className={styles.logoutBtn} onClick={() => signOut()}>
+            Sair
+          </button>
         </div>
       </div>
     </div>
