@@ -7,17 +7,38 @@ import avatarDefault from "../../assets/avatar.png";
 
 import { AuthContext } from "../../contexts/Auth";
 
+import firebase from "../../services/firebaseConnection";
+
 import { FiSettings } from "react-icons/fi";
 import { FiUpload } from "react-icons/fi";
 
 export default function Profile() {
-  const { user, signOut } = useContext(AuthContext);
+  const { user, signOut, setUser, localStoraUser } = useContext(AuthContext);
 
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [avataUrl, setAvatar] = useState(user && user.avataUrl);
-  console.log(avatarDefault);
+  const [imgAvatar, setImgAvatr] = useState(null);
 
+  async function handleSave(e) {
+    e.preventDefault();
+    if (imgAvatar === null && name !== "") {
+      await firebase
+        .firestore()
+        .collection("users")
+        .doc(user.uid)
+        .update({ name: name })
+        .then(() => {
+          let data = {
+            ...user,
+            name: name,
+          };
+          setUser(data);
+          localStoraUser(data);
+        });
+      console.log(firebase);
+    }
+  }
   return (
     <div>
       <Header />
@@ -27,7 +48,7 @@ export default function Profile() {
         </Title>
 
         <div className={styles.container}>
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSave}>
             <label htmlFor="avatar" className={styles.labelAvatar}>
               <span>
                 <FiUpload color="#fff" size={25}></FiUpload>

@@ -118,6 +118,8 @@ export default function AuthProvider({ children }) {
         signIn,
         signUp,
         signOut,
+        setUser,
+        localStoraUser,
       }}
     >
       {children}
