@@ -18,8 +18,27 @@ export default function Profile() {
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [avataUrl, setAvatar] = useState(user && user.avataUrl);
-  const [imgAvatar, setImgAvatr] = useState(null);
+  const [imgAvatar, setImgAvatar] = useState(null);
 
+  function handleFile(e) {
+    e.preventDefault();
+    console.log(e.target.files[0]);
+    const image = e.target.files[0];
+    if (image) {
+      const ispngOrjpeg =
+        image.type === "image/jpeg" || image.type === "image/png";
+      if (ispngOrjpeg) {
+        setImgAvatar(image);
+        setAvatar(URL.createObjectURL(image));
+      } else {
+        alert("envie uma imagem do tipo PNG ou JPEG");
+        setImgAvatar(null);
+        setAvatar("");
+        return null;
+      }
+    }
+  }
+  async function handleUpload() {}
   async function handleSave(e) {
     e.preventDefault();
     if (imgAvatar === null && name !== "") {
@@ -37,6 +56,8 @@ export default function Profile() {
           localStoraUser(data);
         });
       console.log(firebase);
+    } else if (name !== "" && imgAvatar !== null) {
+      handleUpload();
     }
   }
   return (
@@ -53,7 +74,13 @@ export default function Profile() {
               <span>
                 <FiUpload color="#fff" size={25}></FiUpload>
               </span>
-              <input type="file" id="avatar" accept="image/*" /> <br />
+              <input
+                type="file"
+                id="avatar"
+                accept="image/*"
+                onChange={handleFile}
+              />{" "}
+              <br />
               <img src={avataUrl ? avataUrl : avatarDefault} alt="avatar" />
             </label>
 

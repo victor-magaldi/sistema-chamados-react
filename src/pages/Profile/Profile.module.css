@@ -39,6 +39,8 @@
   margin-bottom: 1em;
   border-radius: 50%;
   object-fit: cover;
+  width: 250px;
+  height: 250px;
 }
 .form label {
   margin-bottom: 0.5em;
@@ -83,6 +85,7 @@
   background-color: #121212;
   color: #fff;
 }
+
 @media (max-width: 700px) {
   .content {
     margin-left: 0;
