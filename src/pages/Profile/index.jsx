@@ -38,7 +38,16 @@ export default function Profile() {
       }
     }
   }
-  async function handleUpload() {}
+  async function handleUpload() {
+    const currentUid = user.uid;
+    const uploadTask = await firebase
+      .storage()
+      .ref(`images/${currentUid}/${imgAvatar.name}`)
+      .put(imgAvatar)
+      .then(async () => {
+        console.log("foto enviada com sucesso");
+      });
+  }
   async function handleSave(e) {
     e.preventDefault();
     if (imgAvatar === null && name !== "") {
@@ -57,6 +66,7 @@ export default function Profile() {
         });
       console.log(firebase);
     } else if (name !== "" && imgAvatar !== null) {
+      console.log(name, imgAvatar);
       handleUpload();
     }
   }
