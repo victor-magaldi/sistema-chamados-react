@@ -17,7 +17,7 @@ export default function Profile() {
 
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
-  const [avataUrl, setAvatar] = useState(user && user.avataUrl);
+  const [avataUrl, setAvatar] = useState(user && user.avatarUrl);
   const [imgAvatar, setImgAvatar] = useState(null);
 
   function handleFile(e) {
@@ -40,12 +40,37 @@ export default function Profile() {
   }
   async function handleUpload() {
     const currentUid = user.uid;
-    const uploadTask = await firebase
+    await firebase
       .storage()
       .ref(`images/${currentUid}/${imgAvatar.name}`)
       .put(imgAvatar)
       .then(async () => {
         console.log("foto enviada com sucesso");
+        await firebase
+          .storage()
+          .ref(`images/${currentUid}`)
+          .child(imgAvatar.name)
+          .getDownloadURL()
+          .then(async (url) => {
+            console.log(url);
+            const urlPhoto = url;
+
+            await firebase
+              .firestore()
+              .collection("users")
+              .doc(user.uid)
+              .update({ name: name, avatarUrl: urlPhoto })
+              .then(() => {
+                let data = {
+                  ...user,
+                  name: name,
+                  avatarUrl: urlPhoto,
+                };
+                console.log(data);
+                setUser(data);
+                localStoraUser(data);
+              });
+          });
       });
   }
   async function handleSave(e) {
