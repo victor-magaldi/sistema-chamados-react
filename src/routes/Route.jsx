@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth";
 
-export default function RouteWrapper({
+export default function RouteCustom({
   component: Component,
   isprivate,
   ...rest
