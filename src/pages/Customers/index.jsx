@@ -13,7 +13,10 @@ export default function Customers() {
   const [cnpj, setCnpj] = useState("");
   const [address, setAddres] = useState("");
 
-  async function handleSave() {}
+  async function handleSave(e) {
+    e.preventDefault();
+    alert("salvo");
+  }
 
   return (
     <>
@@ -38,6 +41,7 @@ export default function Customers() {
             <input
               type="cnpj"
               id="cnpj"
+              placeholder="cnpj"
               value={cnpj}
               onChange={(e) => setCnpj(e.target.value)}
             />
@@ -46,11 +50,12 @@ export default function Customers() {
             <input
               type="text"
               id="adress"
+              placeholder="Endereço da sua empresa"
               value={address}
               onChange={(e) => setAddres(e.target.value)}
             />
 
-            <button type="submit">Salvar</button>
+            <button type="submit">Cadastrar</button>
           </form>
         </div>
       </div>
