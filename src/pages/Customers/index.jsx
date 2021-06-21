@@ -1,40 +1,44 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/Auth";
+import React, { useState } from "react";
+// import { AuthContext } from "../../contexts/Auth";
 import styles from "./Customers.module.css";
 
 import Title from "../../components/Title";
 import Header from "../../components/Header";
 
 import { FiUser } from "react-icons/fi";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
-import firebase from "../../services/firebaseConnection"
+import firebase from "../../services/firebaseConnection";
 
 export default function Customers() {
-  const {} = useContext(AuthContext);
+  // const {} = useContext(AuthContext);
   const [nameFantasy, setNameFantasy] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [address, setAddres] = useState("");
 
   async function handleSave(e) {
     e.preventDefault();
-    if (nameFantasy !=="" && cnpj !=="" && address !==""){
-      await firebase.firestore().collection('customers').add({
-        nameFantasy:nameFantasy,
-        cnpj:cnpj,
-        address: address
-      }).then(()=>{
-        setNameFantasy("")
-        setCnpj("")
-        setAddres("")
-        toast.info("empresa cadastrada com sucesso")
-      }).catch((error)=>{
-        toast.error("ocorreu algum erro, tente novamente mais tarde")
-        console.log(error)
-      })
-    }else{
-      toast.error("Preencha todos os campos para cadastrar a empresa")
-
+    if (nameFantasy !== "" && cnpj !== "" && address !== "") {
+      await firebase
+        .firestore()
+        .collection("customers")
+        .add({
+          nameFantasy: nameFantasy,
+          cnpj: cnpj,
+          address: address,
+        })
+        .then(() => {
+          setNameFantasy("");
+          setCnpj("");
+          setAddres("");
+          toast.info("empresa cadastrada com sucesso");
+        })
+        .catch((error) => {
+          toast.error("ocorreu algum erro, tente novamente mais tarde");
+          console.log(error);
+        });
+    } else {
+      toast.error("Preencha todos os campos para cadastrar a empresa");
     }
   }
 

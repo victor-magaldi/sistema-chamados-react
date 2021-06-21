@@ -8,8 +8,11 @@ export default function Dashboard() {
   return (
     <>
       <Header />
-      <h3>Dashboard</h3>
-      <button onClick={() => signOut()}>Sair</button>
+      <div className="containerDashboard">
+        <h3>Dashboard</h3>
+
+        <button onClick={() => signOut()}>Sair</button>
+      </div>
     </>
   );
 }
