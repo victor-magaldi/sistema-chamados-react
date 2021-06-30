@@ -1,0 +1,23 @@
+.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+}
+.container {
+  display: flex;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 0.8em;
+  margin-bottom: 1.5em;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form input,
+.form select {
+  margin-bottom: 1em;
+  padding: 0.7em;
+  max-width: 600px;
+  width: 100%;
+  border: 0;
+}
