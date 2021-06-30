@@ -6,13 +6,13 @@ import Signin from "../pages/Signin";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import Customers from "../pages/Customers";
+import New from "../pages/New";
 
 export default function Router() {
   return (
     <Switch>
       <RouteCustom exact path="/" component={Signin}></RouteCustom>
       <RouteCustom exact path="/register" component={Signup}></RouteCustom>
-
       <RouteCustom
         exact
         path="/dashboard"
@@ -31,6 +31,7 @@ export default function Router() {
         component={Customers}
         isprivate
       ></RouteCustom>
+      <RouteCustom exact path="/new" component={New} isprivate></RouteCustom>
     </Switch>
   );
 }
