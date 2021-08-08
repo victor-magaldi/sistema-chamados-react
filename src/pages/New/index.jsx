@@ -5,9 +5,8 @@ import Header from "../../components/Header";
 import { FiPlusCircle } from "react-icons/fi";
 
 import styles from "./New.module.css";
-import { div } from "prelude-ls";
 
-export default function indes() {
+export default function New() {
   return (
     <div className={styles.containerNewCall}>
       <div className={styles.content}>
@@ -16,12 +15,13 @@ export default function indes() {
         <Title name="Novo chamado">
           <FiPlusCircle size={25} />
         </Title>
+
         <div className={styles.container}>
           <form onSubmit className={styles.form}>
             <label>Cliente</label>
             <select>
               <option value="1" key={1}>
-                Sujeito Programador
+                Otaviano Victorino
               </option>
             </select>
 
@@ -31,6 +31,43 @@ export default function indes() {
               <option value="Visita Técnica">Visita Técnica</option>
               <option value="Financeiro">Financeiro</option>
             </select>
+
+            <label>status</label>
+            <div className={styles.status}>
+              <input
+                type="radio"
+                name="status"
+                value="aberto"
+                id="aberto"
+                // onChange={}
+              />
+              <label htmlFor="aberto">aberto</label>
+
+              <input
+                type="radio"
+                name="status"
+                value="progresso"
+                id="progresso"
+                // onChange={}
+              />
+              <label htmlFor="progresso">progresso</label>
+
+              <input
+                type="radio"
+                name="status"
+                value="atendido"
+                id="atendido"
+                // onChange={}
+              />
+              <label htmlFor="atendido">atendido</label>
+            </div>
+            <label>Complemento</label>
+            <textarea
+              rows={8}
+              placeholder="Descreva seu problema! (opcional)"
+            />
+
+            <button type="submit"> Registrar</button>
           </form>
         </div>
       </div>

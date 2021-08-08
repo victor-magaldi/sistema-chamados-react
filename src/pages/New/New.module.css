@@ -12,6 +12,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  width: 320px;
 }
 .form input,
 .form select {
@@ -20,4 +21,83 @@
   max-width: 600px;
   width: 100%;
   border: 0;
+}
+
+.containerDashboard {
+  margin-left: 200px;
+  padding: 1px 16px;
+}
+.container {
+  display: flex;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 0.8em;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.dashboard span {
+  margin: 2em 0;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.new {
+  background-color: #83bf02;
+  color: #fff;
+  border: 0;
+  padding: 0.5em;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+  align-self: flex-end;
+  max-width: 170px;
+}
+.new:hover {
+  background: #5fd204;
+  transform: scale(1.1);
+}
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 0 0.8em 0;
+}
+.form label {
+  margin-bottom: 0.3em;
+}
+
+.status > input,
+.status > label {
+  cursor: pointer;
+}
+.status > label {
+  margin: 0 1em 0 0;
+}
+.form input[type="radio"] {
+  margin-bottom: 0;
+  width: 1em;
+  padding: 0;
+  margin: 0 0.3em 0 0;
+}
+.form textarea {
+  padding: 0.3em;
+}
+.form [type="submit"] {
+  max-width: 600px;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: #181c2e;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+  border: none;
+  margin: 0.8em 0;
 }
