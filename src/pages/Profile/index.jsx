@@ -114,7 +114,7 @@ export default function Profile() {
                 id="avatar"
                 accept="image/*"
                 onChange={handleFile}
-              />{" "}
+              />
               <br />
               <img src={avataUrl ? avataUrl : avatarDefault} alt="avatar" />
             </label>
