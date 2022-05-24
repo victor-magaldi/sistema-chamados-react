@@ -51,7 +51,11 @@
   border-radius: 0;
   background-color: #181c2e;
   color: #fff;
-  font-size: 1.3em;
+  font-size: 1.2em;
+  transition: 0.3s ease-in-out;
+}
+.login form button:hover {
+  filter: brightness(2.1);
 }
 .linkCreateAccount {
   margin: 1.5em;
